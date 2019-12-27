@@ -15,11 +15,11 @@ app.use(bodyParser.urlencoded({
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
-app.get("/", async (req, res) => {
+app.get("/random-instagram-comment-picker", async (req, res) => {
     renderTemplate(res, req, "index.ejs", { alert: null, payload: null });
 });
 
-app.post("/", async (req, res) => {
+app.post("/random-instagram-comment-picker", async (req, res) => {
     const token = req.body.token;
     const url = req.body.url;
     var amount = req.body.amount;
