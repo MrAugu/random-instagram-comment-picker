@@ -165,6 +165,7 @@ ul {
     </div>
             
     <h2 class="head-title-underline">Instagram Random Comment Picker</h2>
+    <h3 class="head-title-under-line-child">Made by MrAugu</h3>
     <form method="POST" class="form">
         <div class="form-field">
             <p class="form-field-title">Your instagram access token:</p>
@@ -189,11 +190,15 @@ ul {
         <p onclick="document.forms[0].submit()" class="form-button">Pick Winner(s)</p>
 
         <% if (payload && payload.winners) { %>
-            <ul class="winners-ul">
-                <% payload.winners.forEach(winner => { %>
-                    <li class="winner-li"><bold><%= `@${winner.username}` %></bold><p class="form-field-title-description"><%= winner.content %></p></li>
-                <% }); %>
-            </ul>
+            <% if (payload.winners.length < 1) { %>
+                <h2 class="head-title-underline">No Valid Winners (Maybe try to edit filter options?)</h2>
+            <% } else { %>
+                <ul class="winners-ul">
+                    <% payload.winners.forEach(winner => { %>
+                        <li class="winner-li"><bold><%= `@${winner.username}` %></bold><p class="form-field-title-description"><%= winner.content %></p></li>
+                    <% }); %>
+                </ul>
+            <% } %>
         <% } %>
     </form>
 </body>

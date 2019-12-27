@@ -79,7 +79,7 @@ app.post("/", async (req, res) => {
         }
         comments = validComments;
       }
-      
+
     if (amount > comments.length) payload["winners"] = shuffle(comments).map(w => {
         var o = { "username": w.from.username,  "content": w.text };
         return o;
@@ -87,6 +87,8 @@ app.post("/", async (req, res) => {
 
     payload["winners"] = [];
     comments = shuffle(comments);
+
+    if (comments.length < 1) return renderTemplate(res, req, "index.ejs", { alert: null, payload: payload });
 
     for (var i = 0; i <= amount - 1; i++) {
        payload["winners"].push({ "username": comments[i].from.username, "content": comments[i].text });
