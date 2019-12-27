@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random Commet Picker</title>
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sofia-pro, sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  background-color: #16151d!important;
+  color: #ffffff;
+}
+.head-title-underline {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.head-title-under-line-child {
+  text-align: center;
+  position: relative;
+  top: 0.3em;
+  margin-bottom: 5em;
+}
+
+.form {
+  margin: 2em;
+}
+
+.form-field {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.form-field-title {
+  font-size: 18px;
+}
+
+.form-field-text-input {
+  width: 100%;
+  height: 40px;
+  background-color: #16151d;
+  padding: 0.50em 0.60em;
+  color: #ffffff;
+  border: solid 1px #49474d;
+  border-radius: 3px;
+}
+
+.form-field-text-input:focus {
+  border-color: #446fff;
+}
+
+.form-field-title-description {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: lightslategray;
+}
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.form-button {
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #446fff;
+  padding: 7px;
+  border-radius: 3px;
+  position: relative;
+  transition: 0.5s;
+  height: 40px;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-top: 10px;
+}
+
+.form-button:hover {
+  border: 1px solid #ffffff;
+  background-color: #ffffff;
+  color: #446fff;
+  transition: 0.5s;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+.closebtn:hover {
+  color: bla
+}
+
+#alerts {
+  text-align: center;
+  margin-right: 2em;
+  margin-left: 2em;
+  margin-top: 2em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.winners-ul {
+    margin: 0.5em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.winner-li {
+    padding: 10px;
+    border: 1px solid #446fff;
+    width: 100%;
+    word-break: break-all;
+    border-radius: 3px;
+    margin: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 700px) {
+  .winners-ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .winner-li {
+      width: 30%;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <div id="alerts">
+        <% if (alert) { %>
+            <div class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <%- alert %></div>
+        <% } %>
+    </div>
+            
+    <h2 class="head-title-underline">Instagram Random Comment Picker</h2>
+    <form method="POST" class="form">
+        <div class="form-field">
+            <p class="form-field-title">Your instagram access token:</p>
+            <p class="form-field-title-description">You can get it from <a href="https://instagram.pixelunion.net/">here</a> acess token allows website to read comments from your posts, your follower count, name and avatar url, we only use it to read comments. As we do not store those access tokens, you need to place your acess token each time you want to pick winners. <bold>IF YOU RECORD OR SCREENSHOT, BLUR THE ACCESS TOKEN!!!</bold></p>
+            <input name="token" type="text" class="form-field-text-input" placeholder="60715645.1677ed0.4104c8011454809ad2ae5906796423b4443" required <%- payload ? `value="${payload.token}"` : "" %>>
+        </div>
+        <div class="form-field">
+            <p class="form-field-title">Your post url:</p>
+            <p class="form-field-title-description">Post you want to pick comments from:</p>
+            <input name="url" type="text" class="form-field-text-input" placeholder="https://www.instagram.com/p/B2KZZwro94J/" required <%- payload ? `value="${payload.url}"` : "" %>>
+        </div>
+        <div class="form-field">
+            <p class="form-field-title">Amount of comments to pick:</p>
+            <p class="form-field-title-description">Warning: Entering a bigger number of comments to be picked than actual number of comments, will result in all comments being picked.</p>
+            <input name="amount" type="number" class="form-field-text-input" placeholder="5" min="1" required <%- payload ? `value="${payload.amount}"` : "" %>>
+        </div>
+        <div class="form-field">
+            <p class="form-field-title">Filter: Optional</p>
+            <p class="form-field-title-description">Add each word with 1 space in between, the comments that do not contain all those words (case insensitive) will be excluded.</p>
+            <input name="filter" type="text" class="form-field-text-input" placeholder="#giveaway" required <%- payload ? `value="${payload.filter}"` : "" %>>
+        </div>
+        <p onclick="document.forms[0].submit()" class="form-button">Pick Winner(s)</p>
+
+        <% if (payload && payload.winners) { %>
+            <ul class="winners-ul">
+                <% payload.winners.forEach(winner => { %>
+                    <li class="winner-li"><bold><%= `@${winner.username}` %></bold><p class="form-field-title-description"><%= winner.content %></p></li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </form>
+</body>
+</html>

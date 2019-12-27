@@ -1,0 +1,28 @@
+{
+  "name": "random-instagram-comment-picker",
+  "version": "1.0.0",
+  "description": "Express website that lets you pick a random commet from any post you make on instagram. Includes instagram OAuth2.0 login.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrAugu/random-instagram-comment-picker.git"
+  },
+  "author": "MrAugu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrAugu/random-instagram-comment-picker/issues"
+  },
+  "homepage": "https://github.com/MrAugu/random-instagram-comment-picker#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "instagram-api": "^1.0.3",
+    "instagram-node": "^0.5.8",
+    "node-fetch": "^2.6.0"
+  }
+}
