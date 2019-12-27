@@ -23,7 +23,8 @@ app.post("/", async (req, res) => {
     const token = req.body.token;
     const url = req.body.url;
     var amount = req.body.amount;
-    const filer 
+    const filter = req.body.filter;
+
     if (!token) return renderTemplate(res, req, "index.ejs", { alert: "A token must be specified.", payload: null });;
     if (!url) return renderTemplate(res, req, "index.ejs", { alert: "An url must be specified.", payload: null });;
     if (!amount) return renderTemplate(res, req, "index.ejs", { alert: "An amount must be specified.", payload: null });;
@@ -60,6 +61,25 @@ app.post("/", async (req, res) => {
     payload["remaining-requests"] = comments.remaining;
     comments = comments.data;
 
+    if (filter) {
+        payload["filter"] = filter;
+        const words = filter.split(" ").map(w => w.toLowerCase());
+        var validComments = [];
+  
+        for (var y = 0; y < comments.length; y++) {
+            const comment = comments[y];
+            var valid = true;
+            for (var q = 0; q < words.length; q++) {
+              if (!comment.text.toLowerCase().includes(words[q])) {
+                valid = false;
+                break;
+              }
+            }
+            if (valid === true) validComments.push(comment);
+        }
+        comments = validComments;
+      }
+      
     if (amount > comments.length) payload["winners"] = shuffle(comments).map(w => {
         var o = { "username": w.from.username,  "content": w.text };
         return o;

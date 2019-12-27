@@ -168,7 +168,7 @@ ul {
     <form method="POST" class="form">
         <div class="form-field">
             <p class="form-field-title">Your instagram access token:</p>
-            <p class="form-field-title-description">You can get it from <a href="https://instagram.pixelunion.net/">here</a> acess token allows website to read comments from your posts, your follower count, name and avatar url, we only use it to read comments. As we do not store those access tokens, you need to place your acess token each time you want to pick winners. <bold>IF YOU RECORD OR SCREENSHOT, BLUR THE ACCESS TOKEN!!!</bold></p>
+            <p class="form-field-title-description">You can get it from <a href="https://instagram.pixelunion.net/" target="blank">here</a> acess token allows website to read comments from your posts, your follower count, name and avatar url, we only use it to read comments. As we do not store those access tokens, you need to place your acess token each time you want to pick winners. <bold>IF YOU RECORD OR SCREENSHOT, BLUR THE ACCESS TOKEN!!!</bold></p>
             <input name="token" type="text" class="form-field-text-input" placeholder="60715645.1677ed0.4104c8011454809ad2ae5906796423b4443" required <%- payload ? `value="${payload.token}"` : "" %>>
         </div>
         <div class="form-field">
@@ -184,7 +184,7 @@ ul {
         <div class="form-field">
             <p class="form-field-title">Filter: Optional</p>
             <p class="form-field-title-description">Add each word with 1 space in between, the comments that do not contain all those words (case insensitive) will be excluded.</p>
-            <input name="filter" type="text" class="form-field-text-input" placeholder="#giveaway" required <%- payload ? `value="${payload.filter}"` : "" %>>
+            <input name="filter" type="text" class="form-field-text-input" placeholder="#giveaway" required <%- payload && payload.filter ? `value="${payload.filter}"` : "" %>>
         </div>
         <p onclick="document.forms[0].submit()" class="form-button">Pick Winner(s)</p>
 
