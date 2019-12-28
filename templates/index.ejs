@@ -172,6 +172,15 @@ ul {
 }
 
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155101506-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155101506-1');
+    </script>
 </head>
 <body>
     <div id="alerts">
@@ -186,8 +195,8 @@ ul {
     <form method="POST" class="form">
         <div class="form-field">
             <p class="form-field-title">Your instagram access token:</p>
-            <p class="form-field-title-description">You can get it from <a href="https://instagram.pixelunion.net/" target="blank" style="text-decoration: none; color: #446fff;">here</a> acess token allows website to read comments from your posts, your follower count, name and avatar url, we only use it to read comments. As we do not store those access tokens, you need to place your acess token each time you want to pick winners. <bold>IF YOU RECORD OR SCREENSHOT, BLUR THE ACCESS TOKEN!!!</bold></p>
-            <input name="token" type="text" class="form-field-text-input" placeholder="60715645.1677ed0.4104c8011454809ad2ae5906796423b4443" required <%- payload ? `value="${payload.token}"` : "" %>>
+            <p class="form-field-title-description">You can get it from <a href="https://instagram.pixelunion.net/" target="blank" style="text-decoration: none; color: #446fff;">here</a> acess token allows website to read comments from your posts, your follower count, name and avatar url, we only use it to read comments. As we do not store those access tokens, you need to place your acess token each time you want to pick winners.</p>
+            <input name="token" type="password" class="form-field-text-input" placeholder="60715645.1677ed0.4104c8011454809ad2ae5906796423b4443" required <%- payload ? `value="${payload.token}"` : "" %>>
         </div>
         <div class="form-field">
             <p class="form-field-title">Your post url:</p>
